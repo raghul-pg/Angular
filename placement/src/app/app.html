@@ -1,0 +1,119 @@
+﻿<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <h1>Campus Placement Portal</h1>
+    <p class="subtitle">Find companies matching your eligibility</p>
+  </header>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="filter-group">
+      <div class="filter-item">
+        <label for="userCGPA">Your CGPA</label>
+        <input 
+          type="number" 
+          id="userCGPA" 
+          [(ngModel)]="userCGPA" 
+          min="0" 
+          max="10" 
+          step="0.1"
+          (change)="onFilterChange()"
+          placeholder="Enter your CGPA">
+      </div>
+
+      <div class="filter-item">
+        <label for="branch">Branch</label>
+        <select 
+          id="branch" 
+          [(ngModel)]="selectedBranch"
+          (change)="onFilterChange()">
+          <option value="All">All Branches</option>
+          <option *ngFor="let branch of uniqueBranches" [value]="branch">
+            {{ branch }}
+          </option>
+        </select>
+      </div>
+
+      <button class="btn-reset" (click)="resetFilters()">Reset Filters</button>
+    </div>
+  </section>
+
+  <!-- Results Count -->
+  <div class="results-info">
+    <p>Found <strong>{{ filteredCompanies.length }}</strong> eligible companies</p>
+  </div>
+
+  <!-- Companies Grid -->
+  <section class="companies-container">
+    <div *ngIf="filteredCompanies.length === 0" class="no-results">
+      <p>No companies match your criteria. Try entering a valid CGPA.</p>
+    </div>
+
+    <div *ngFor="let company of filteredCompanies" class="company-card" [class.expanded]="expandedCompanyId === company.id">
+      <!-- Header -->
+      <div class="card-header" (click)="toggleDetails(company.id)">
+        <div class="company-info">
+          <h2>{{ company.name }}</h2>
+          <p class="cgpa-badge">Min CGPA: <strong>{{ company.cgpa }}</strong></p>
+        </div>
+        <div class="toggle-icon">{{ expandedCompanyId === company.id ? '▼' : '▶' }}</div>
+      </div>
+
+      <!-- Quick Info -->
+      <div class="quick-info">
+        <div class="info-item">
+          <span class="label">Total Package</span>
+          <span class="value">{{ company.package }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Rounds</span>
+          <span class="value">{{ company.rounds }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Date</span>
+          <span class="value">{{ company.date }}</span>
+        </div>
+      </div>
+
+      <!-- Details (Expandable) -->
+      <div class="details" *ngIf="expandedCompanyId === company.id">
+        <div class="detail-section">
+          <h3>Salary Breakdown</h3>
+          <div class="detail-content">
+            <p><strong>Base:</strong> {{ company.salary.base }}</p>
+            <p *ngIf="company.salary.bonus"><strong>Bonus:</strong> {{ company.salary.bonus }}</p>
+            <p><strong>Total:</strong> {{ company.salary.total }}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Roles</h3>
+          <div class="roles-list">
+            <span class="role-tag" *ngFor="let role of company.roles">{{ role }}</span>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Selection Process ({{ company.rounds }} Rounds)</h3>
+          <ol class="process-list">
+            <li *ngFor="let process of company.selectionProcess">{{ process }}</li>
+          </ol>
+        </div>
+
+        <div class="detail-section">
+          <h3>Eligibility</h3>
+          <div class="detail-content">
+            <p><strong>Branches:</strong> {{ company.branches }}</p>
+            <p *ngIf="company.workLocation"><strong>Work Location:</strong> {{ company.workLocation }}</p>
+          </div>
+        </div>
+
+        <div class="detail-section" *ngIf="company.companyLink">
+          <a [href]="company.companyLink" target="_blank" class="company-link">
+            Visit Company Website ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
