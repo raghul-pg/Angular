@@ -1,0 +1,36 @@
+﻿:root {
+  --primary-color: #00bcd4;
+  --secondary-color: #0097a7;
+  --text-dark: #1a3a52;
+  --text-light: #999;
+  --bg-light: #f5f7fa;
+  --bg-white: #ffffff;
+  --border-color: #e0e0e0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
