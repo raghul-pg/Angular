@@ -1,6 +1,6 @@
 
 export default {
-  basePath: '/your-repo-name',
+  basePath: '/Angular',
   allowedHosts: [],
   supportedLocales: {
   "en-US": ""
