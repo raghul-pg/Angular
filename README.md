@@ -85,7 +85,7 @@ Before you begin, ensure you have the following installed:
    ```
    Output will be in the `dist/placement` directory
 
-## � GitHub Deployment
+## 🚀 GitHub Deployment
 
 ### 1. Initialize the repository
 ```bash
@@ -116,7 +116,7 @@ When you push to the `main` branch, GitHub will:
 3. Set the source to **gh-pages** branch.
 4. Save and wait a few minutes for the site to go live.
 
-## �💻 Usage
+## 💻 Usage
 
 ### Filtering Companies
 
